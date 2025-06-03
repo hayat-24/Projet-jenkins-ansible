@@ -2,6 +2,7 @@
 - name: Déploiement d'une application web simple
   hosts: webserver
   become: true
+
   tasks:
     - name: Créer le dossier de l'application
       file:
@@ -10,19 +11,23 @@
         owner: www-data
         group: www-data
         mode: '0755'
-- name: Déployer la page HTML
+
+    - name: Déployer la page HTML
       copy:
         src: files/index.html
         dest: /var/www/html/myapp/index.html
         owner: www-data
         group: www-data
         mode: '0644'
-- name: Vérifier si nginx est installé
+
+    - name: Vérifier si nginx est installé
       stat:
         path: /etc/init.d/nginx
       register: nginx_installed
-- name: Redémarrer nginx si présent
+
+    - name: Redémarrer nginx si présent
       service:
         name: nginx
         state: restarted
       when: nginx_installed.stat.exists
+
