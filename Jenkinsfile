@@ -1,10 +1,13 @@
 pipeline {
-  agent any
-  stages {
-    stage('Déploiement') {
-      steps {
-        sh '/usr/bin/ansible-playbook -i inventory.ini playbook.yml'
-      }
+    agent { label 'master' }  // ou simplement: agent any
+    environment {
+        PATH = "/usr/bin:$PATH"
     }
-  }
+    stages {
+        stage('Déploiement') {
+            steps {
+                sh 'ansible-playbook -i inventory.ini playbook.yml'
+            }
+        }
+    }
 }
