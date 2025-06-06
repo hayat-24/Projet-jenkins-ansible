@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Déploiement') {
       steps {
-        sh 'ansible-playbook -i inventory.ini playbook.yml'
+        sh '/usr/bin/ansible-playbook -i inventory.ini playbook.yml'
       }
     }
   }
