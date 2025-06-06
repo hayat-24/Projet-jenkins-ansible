@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Déploiement') {
             steps {
-                sh 'ansible-playbook -i inventory.ini playbook.yml'
+                sh 'ansible-playbook -i inventory.ini playbook.yml --user=jenkins --extra-vars "ansible_sudo_pass=1234"'
             }
         }
     }
